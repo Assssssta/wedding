@@ -339,35 +339,18 @@ href="https://yandex.ru/maps"
 Подтвердите присутствие
 </h2>
 
-<form class="form">
+<form class="form" id="rsvpForm">
 
-<input
-type="text"
-placeholder="Ваше имя"
-required
->
+<input type="text" id="name" placeholder="Ваше имя" required>
 
-<input
-type="tel"
-placeholder="Телефон"
-required
->
+<input type="tel" id="phone" placeholder="Телефон" required>
 
-<select>
-
-<option>
-Да, обязательно буду
-</option>
-
-<option>
-К сожалению, не смогу
-</option>
-
+<select id="attending">
+  <option value="Да">Да, приду</option>
+  <option value="Нет">Не смогу</option>
 </select>
 
-<button type="submit">
-Отправить
-</button>
+<button type="submit">Отправить</button>
 
 </form>
 
@@ -459,3 +442,24 @@ music.pause();
 
 </body>
 </html>
+<script>
+const scriptURL = "ТВОЙ_URL_ИЗ_APPS_SCRIPT";
+
+document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const data = {
+    name: document.getElementById("name").value,
+    phone: document.getElementById("phone").value,
+    attending: document.getElementById("attending").value
+  };
+
+  await fetch(scriptURL, {
+    method: "POST",
+    body: JSON.stringify(data)
+  });
+
+  alert("Спасибо! Ваш ответ записан 💛");
+  e.target.reset();
+});
+</script>

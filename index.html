@@ -455,10 +455,12 @@ document.getElementById("rsvpForm").addEventListener("submit", async (e) => {
   };
 
   await fetch(scriptURL, {
-    method: "POST",
-    body: JSON.stringify(data)
-  });
-
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(data)
+});
   alert("Спасибо! Ваш ответ записан 💛");
   e.target.reset();
 });
